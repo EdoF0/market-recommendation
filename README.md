@@ -19,3 +19,10 @@ The original dataset is a big `csv` file of 22078467 (~22 million) records and 1
 - `userid`: anonymized user identifier, every row has a different value since each row is an already computed profile of interest
 
 Note that we do not have the total number of visits `impressions` for every user.
+
+## Approach
+
+Let $X$ of dimension $n \times m$ be the dataset matrix with $n$ interest profiles and $m$ columns that are all the columns from a `categories*` group to choose.  
+We know that $\sum_{k=1}^{m}X_{i,k}=100, \ \forall i = 1, \dots, n$.
+
+Let the given category be the column index $g \in \{1, \dots, m\}$. Our objective is to obtain a meaningful matrix of the general interests $I$ of size $m \times m$, where every cell $I_{h,k}, h \in \{1, \dots, m\}, k \in \{1, \dots, m\}$ is a measure of the interest in the category $k$ given the interest in category $h$.
