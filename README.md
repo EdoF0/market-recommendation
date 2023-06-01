@@ -11,9 +11,9 @@ The original dataset is a big `csv` file of 22078467 (~22 million) records and 1
 - `time1`: relative number of articles seen divided in workday or weekend and for each of the two options divided in morning, afternoon, evening, night
 - `time2`: relative number of articles seen divided in morning early, morning, launch, afternoon, evening, night, sleep
 - `L`: relative number of articles seen divided by text length 00 to 50, 51 to 100, 101 to 250, 251 to 500, 501 to 1000, 1001 to 2500, 2501 to 5000, 5001 to 10000, 10001 and more
-- `categories1`: relative number of articles seen divided into 33? categories, it's the first category granularity level
-- `categories2`: relative number of articles seen divided into 333? categories, it's the second category granularity level
-- `categories2`: relative number of articles seen divided into 3333? categories, it's the third category granularity level
+- `categories1`: relative number of articles seen divided into 31 categories, it's the first category granularity level
+- `categories2`: relative number of articles seen divided into 360 categories, it's the second category granularity level
+- `categories2`: relative number of articles seen divided into 575 categories, it's the third category granularity level
 - `sentiments1`: sentiment analysis of the text by a prototype model, we ignore this columns
 - `feelings1`: sentiment analysis of the text by a prototype model, we ignore this columns
 - `userid`: anonymized user identifier, every row has a different value since each row is an already computed profile of interest
