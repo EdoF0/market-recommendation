@@ -10,8 +10,6 @@ line_cap = 10
 
 # number of lines in each file, without the header
 lines = 1000000
-line_counter = 0
-header = ""
 
 # create output folder
 if not path.exists(folder_out):
@@ -20,6 +18,10 @@ if not path.exists(folder_out):
 def generate_filename(file_index: int):
     return(f"market-{file_index}.csv")
 
+# keep track of per-file rows
+line_counter = 0
+# remember header to copy it in every file
+header = ""
 # current output file related variables
 file_index = 0
 file_name = generate_filename(file_index)
