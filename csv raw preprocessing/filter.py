@@ -1,8 +1,8 @@
 import sys
 
-file_in = "market.csv"
-file_out = "market-clean-test.csv"
-file_out_sum = "market-sum-test.csv" # if None does not write the sum csv
+file_in = "market-cleanup.csv"
+file_out = "market-cleanup-filter-test.csv"
+file_out_sum = "market-colgroup-sum-test.csv" # if None does not write the sum csv
 
 # max lines processed
 line_cap = 10
@@ -67,7 +67,7 @@ header_sum: list = list(sum_to_100_col_groups.keys()) + list(sum_lt_100_col_grou
 # function that does not fail write if file_out_sum is None
 def write_sum(values: list) -> None:
     if file_out_sum != None and len(header_sum) == len(values):
-        csv_out_sum.write(','.join(str(value) for value in values))
+        csv_out_sum.write(','.join(str(value) for value in values) + '\n')
 
 write_sum(header_sum)
 
