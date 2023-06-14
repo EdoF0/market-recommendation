@@ -1,0 +1,51 @@
+version: "3"
+services:
+  marketdb:
+    container_name: marketdb
+    image: scylladb/scylla:5.2
+    # give more freedom to scylla to manage disk at low level
+    security_opt:
+      - seccomp:unconfined
+    # overprovisioned 1: the hardware is shared with processes different than Scylla
+    # smp 4: use 4 CPU cores
+    # memory 8G: use 8G of RAM memory
+    # developer-mode 0: enable production mode,
+    #  that enables additional system and performance checks
+    #  (most important, ensures the data folder has XFS filesystem)
+    # more info: https://hub.docker.com/r/scylladb/scylla/
+    command: --overprovisioned 1 --smp 4 --memory 8G --developer-mode 0
+    ports:
+      - 7000:7000/tcp # Inter-node RPC
+      - 7001:7001/tcp # Inter-node RPC SSL
+      - 7199:7199/tcp # JMX
+      - 9042:9042/tcp # CQL
+      - 9142:9142/tcp # CQL SSL
+      - 9160:9160/tcp # Thrift
+      #- 9180:9180/tcp # Prometheus API
+      #- 9100:9100/tcp # node_exporter
+      - 10000:10000/tcp # REST API
+      - 19042:19042/tcp # Native shard-aware transport port
+      - 19142:19142/tcp # Native shard-aware transport port SSL
+    volumes:
+      # data volume
+      - marketdb-scylla-data:/var/lib/scylla
+      # configuration file
+      - ./bind/scylla.yaml:/etc/scylla/scylla.yaml
+      # csv source
+      - E:\Data\Analysis\Data science lab Gerli web datasets\Market analysis:/home/marketraw
+  marketdb-ui:
+    container_name: marketdb-ui
+    # https://github.com/orzhaha/cassandra-web
+    # https://hub.docker.com/r/ipushc/cassandra-web
+    image: ipushc/cassandra-web:v1.1.1
+    environment:
+      - HOST_PORT=:80
+      - CASSANDRA_HOST=marketdb
+      - CASSANDRA_USERNAME=cassandra
+      - CASSANDRA_PASSWORD=cassandra
+    ports:
+      # connect on http://localhost:8080/
+      - 8080:80/tcp
+
+volumes:
+  marketdb-scylla-data:
