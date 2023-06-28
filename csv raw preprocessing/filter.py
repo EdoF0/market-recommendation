@@ -114,7 +114,7 @@ with open(file_out, "w") as csv_out:
 
             # save cleaned data
             if (ok):
-                # writing \n is not needed since userid value includes the new line
+                # writing \n is not needed since last value includes the new line
                 csv_out.write(','.join(line))
             else:
                 lines_filtered += 1
