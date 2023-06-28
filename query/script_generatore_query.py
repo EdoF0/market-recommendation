@@ -20,4 +20,4 @@ for colonna in lista_colonne:
 
 with open('listaQuerySQL.txt', 'w') as file:
     for i in lista_query_aggiustamento_no_filtro:
-        file.write(i)
+        file.write(i+'\n')
