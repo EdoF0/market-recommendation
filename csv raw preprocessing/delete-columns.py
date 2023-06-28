@@ -6,7 +6,7 @@ file_out = "market-without-columns-test.csv"
 # max lines processed
 line_cap = 10
 
-delete_columns = list(range(416, 991)) # categories3
+delete_columns = list(range(56, 991)) # categories3 and categories2
 # reverse because if deleting in order column indexes changes by one every time
 delete_columns.reverse()
 
