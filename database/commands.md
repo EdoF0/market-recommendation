@@ -4,10 +4,10 @@ Commands ready to be copied and pasted into the container terminal.
 
 ### CQLSH
 
-Request timeout is in seconds, 3600 is 1h
+Request timeout is in seconds, 7200 is 2h
 
 ```bash
-cqlsh --request-timeout=3600
+cqlsh --request-timeout=7200
 ```
 
 ### Info
