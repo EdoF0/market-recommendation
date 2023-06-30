@@ -417,12 +417,17 @@ CREATE TABLE market.market (
     categories2_womenshealth double,
     categories2_work double,
     categories2_wrestling double,
-    categories2_zoo double
+    categories2_zoo double,
+    sum_time1 double,
+    sum_time2 double,
+    sum_length double,
+    sum_categories1 double,
+    sum_categories2 double
 )
 WITH caching = {'keys': 'NONE'} -- do not chache keys for this table, since all the queries we will do does not select based on key
 ;
 
--- with categories3
+-- complete
 CREATE TABLE market.market (
     userid ascii primary key,
     time1_workday_morning double,
@@ -440,15 +445,15 @@ CREATE TABLE market.market (
     time2_evening double,
     time2_night double,
     time2_sleep double,
-    "L00_50" double, -- case sensitive column names require double quotes, or are saved to lower case
-    "L51_100" double,
-    "L101_250" double,
-    "L251_500" double,
-    "L501_1000" double,
-    "L1001_2500" double,
-    "L2501_5000" double,
-    "L5001_10000" double,
-    "L10001_more" double,
+    L00_50 double, -- case sensitive column names require double quotes, or are saved to lower case
+    L51_100 double,
+    L101_250 double,
+    L251_500 double,
+    L501_1000 double,
+    L1001_2500 double,
+    L2501_5000 double,
+    L5001_10000 double,
+    L10001_more double,
     categories1_artandentertainment double,
     categories1_automotive double,
     categories1_business double,
@@ -1414,7 +1419,13 @@ CREATE TABLE market.market (
     categories3_windows double,
     categories3_woodworking double,
     categories3_workother double,
-    categories3_zoology double
+    categories3_zoology double,
+    sum_time1 double,
+    sum_time2 double,
+    sum_length double,
+    sum_categories1 double,
+    sum_categories2 double,
+    sum_categories3 double
 )
 WITH caching = {'keys': 'NONE'} -- do not chache keys for this table, since all the queries we will do does not select based on key
 ;
