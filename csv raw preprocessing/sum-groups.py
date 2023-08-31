@@ -6,15 +6,25 @@ file_out = "market-cleanup-grouped-test.csv"
 # max lines processed
 line_cap = 10
 
-# list of column groups to sum
+# list of column groups to sum for cleaned file
 column_groups = {
     "time1": list(range(1, 9)),
     "time2": list(range(9, 16)),
     "length": list(range(16, 25)),
     "categories1": list(range(25, 56)),
-    "categories2": list(range(56, 416)),
-    "categories3": list(range(416, 991)),
 }
+
+# list of column groups to sum for original file
+#column_groups = {
+#    "time1": list(range(1-1, 9-1)),
+#    "time2": list(range(9-1, 16-1)),
+#    "length": list(range(16-1, 25-1)),
+#    "categories1": list(range(25-1, 56-1)),
+#    "categories2": list(range(56-1, 416-1)),
+#    "categories3": list(range(416-1, 991-1)),
+#    "sentiments1": list(range(991-1, 995-1)),
+#    "feelings1": list(range(995-1, 1104-1)),
+#}
 
 with open(file_out, "w") as csv_out:
     with open(file_in, "r") as csv_in:
@@ -36,9 +46,6 @@ with open(file_out, "w") as csv_out:
             # future output line
             line_grouped = []
 
-            # if this line can be written to the filtered file
-            ok = True
-
             if (i > 0):
                 for column_group_name in column_groups:
                     s = sum([float(line[j]) for j in column_groups[column_group_name]])
@@ -52,4 +59,3 @@ with open(file_out, "w") as csv_out:
                 line_grouped = list(column_groups.keys())
 
             csv_out.write(','.join(str(value) for value in line_grouped) + '\n')
-
