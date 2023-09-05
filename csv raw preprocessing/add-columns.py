@@ -1,7 +1,7 @@
 import sys
 
-file_in = "market.csv"
-file_out = "market-with-sum-columns.csv"
+file_in = "analisi-di-mercato-without-dotzero-small-filtered-id0.csv"
+file_out = "analisi-di-mercato-without-dotzero-small-filtered-id0-sumcols.csv"
 
 # max lines processed
 line_cap = 10
@@ -15,9 +15,9 @@ new_columns = {
     "sum_time1": lambda row: str(sum_index(row, list(range(1, 9)))),
     "sum_time2": lambda row: str(sum_index(row, list(range(9, 16)))),
     "sum_length": lambda row: str(sum_index(row, list(range(16, 25)))),
-    "sum_categories1": lambda row: str(sum_index(row, list(range(25, 56)))),
-    "sum_categories2": lambda row: str(sum_index(row, list(range(56, 416)))),
-    "sum_categories3": lambda row: str(sum_index(row, list(range(416, 991)))),
+    "sum_categories1": lambda row: str(sum_index(row, list(range(25, 54)))),
+    #"sum_categories2": lambda row: str(sum_index(row, list(range(56, 416)))),
+    #"sum_categories3": lambda row: str(sum_index(row, list(range(416, 991)))),
 }
 
 with open(file_out, "w") as csv_out:
