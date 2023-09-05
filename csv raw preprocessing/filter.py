@@ -1,35 +1,35 @@
 import sys
 
-file_in = "market-cleanup.csv"
-file_out = "market-cleanup-filter-test.csv"
+file_in = "analisi-di-mercato-without-dotzero-small.csv"
+file_out = "analisi-di-mercato-without-dotzero-small-filtered.csv"
 
 # max lines processed
 line_cap = 10
 
 # custom functions to check the rows
 
-default_margin = 1
+default_margin = 0.00000000000001
 
 # list of column groups in which columns should sum to 100%
 sum_to_100_col_groups = {
-    "time1": list(range(1, 9)),
-    "time2": list(range(9, 16)),
-    "length": list(range(16, 25)),
-    "categories1": list(range(25, 56)),
+    "time1": list(range(1-1, 9-1)),
+    "time2": list(range(9-1, 16-1)),
+    "length": list(range(16-1, 25-1)),
 }
 # list of column groups in which columns should sum to less or equal 100%
 sum_lt_100_col_groups = {
-    "categories2": list(range(56, 416)),
-    "categories3": list(range(416, 991)),
+    "categories1": list(range(25-1, 54-1)),
+    #"categories2": list(range(56, 416)),
+    #"categories3": list(range(416, 991)),
 }
 # list of column groups in which columns should sum greater than 0
 sum_gt_0_col_groups = {
-    "time1": list(range(1, 9)),
-    "time2": list(range(9, 16)),
-    "length": list(range(16, 25)),
-    "categories1": list(range(25, 56)),
-    "categories2": list(range(56, 416)),
-    "categories3": list(range(416, 991)),
+    "time1": list(range(1-1, 9-1)),
+    "time2": list(range(9-1, 16-1)),
+    "length": list(range(16-1, 25-1)),
+    "categories1": list(range(25-1, 54-1)),
+    #"categories2": list(range(56, 416)),
+    #"categories3": list(range(416, 991)),
 }
 
 # returns True if the check_sum test was passed by the input line, False otherwise
@@ -51,7 +51,7 @@ def check_sum(line: list[str], margin: float = default_margin) -> bool:
     # sum greater then 0 check
     for col_group_name in sum_gt_0_col_groups:
         s = sum([float(line[j]) for j in sum_gt_0_col_groups[col_group_name]])
-        if not (s > 0):
+        if not (s > (0+margin)):
             return(False)
 
     return(True)
@@ -90,7 +90,7 @@ with open(file_out, "w") as csv_out:
             if (i > 0):
                 for check_function in checks:
                     ok = ok and check_function(line)
-                    if (ok == False):
+                    if not ok:
                         break
             elif (i == 0):
                 # print columns
