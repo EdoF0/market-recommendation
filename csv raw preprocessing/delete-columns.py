@@ -1,12 +1,12 @@
 import sys
 
-file_in = "market.csv"
-file_out = "market-without-columns-test.csv"
+file_in = "analisi-di-mercato-without-dotzero.csv"
+file_out = "analisi-di-mercato-without-dotzero-small.csv"
 
 # max lines processed
 line_cap = 10
 
-delete_columns = list(range(56, 991)) # categories3 and categories2
+delete_columns = list(range(55, 1103)) # categories2, categories3, sentiments1, feelings1
 # reverse because if deleting in order column indexes changes by one every time
 delete_columns.reverse()
 
@@ -35,4 +35,4 @@ with open(file_out, "w") as csv_out:
                 del line[column_index]
 
             # save cleaned data
-            csv_out.write(','.join(line) + '\n')
+            csv_out.write(','.join(line))
