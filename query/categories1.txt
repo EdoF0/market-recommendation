@@ -3,7 +3,6 @@ categories1_automotive
 categories1_business
 categories1_careers
 categories1_education
-categories1_emotions
 categories1_famigliaegenitorialita
 categories1_famigliaegenitorialitaother
 categories1_familyandparenting
@@ -20,7 +19,6 @@ categories1_pets
 categories1_realestate
 categories1_religionandspirituality
 categories1_science
-categories1_sentiment
 categories1_shopping
 categories1_societa
 categories1_society
