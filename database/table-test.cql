@@ -4,7 +4,7 @@
 
 DROP TABLE market.market_test;
 
--- without categories2 and categories3
+-- without categories2 and categories3 and the null columns
 CREATE TABLE market.market_test (
     userid ascii primary key,
     time1_workday_morning double,
@@ -36,7 +36,7 @@ CREATE TABLE market.market_test (
     categories1_business double,
     categories1_careers double,
     categories1_education double,
-    categories1_emotions double,
+    -- categories1_emotions double,
     categories1_famigliaegenitorialita double,
     categories1_famigliaegenitorialitaother double,
     categories1_familyandparenting double,
@@ -53,7 +53,7 @@ CREATE TABLE market.market_test (
     categories1_realestate double,
     categories1_religionandspirituality double,
     categories1_science double,
-    categories1_sentiment double,
+    -- categories1_sentiment double,
     categories1_shopping double,
     categories1_societa double,
     categories1_society double,

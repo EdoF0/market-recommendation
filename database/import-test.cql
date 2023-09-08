@@ -32,7 +32,7 @@ COPY market.market_test (
     categories1_business,
     categories1_careers,
     categories1_education,
-    categories1_emotions,
+    -- categories1_emotions,
     categories1_famigliaegenitorialita,
     categories1_famigliaegenitorialitaother,
     categories1_familyandparenting,
@@ -49,7 +49,7 @@ COPY market.market_test (
     categories1_realestate,
     categories1_religionandspirituality,
     categories1_science,
-    categories1_sentiment,
+    -- categories1_sentiment,
     categories1_shopping,
     categories1_societa,
     categories1_society,
@@ -63,11 +63,11 @@ COPY market.market_test (
     sum_length,
     sum_categories1
 )
-FROM '/home/marketraw/market-cleanup-filter-no-categories2-3-with-sums.csv'
+FROM '/home/marketraw/market.csv'
 WITH
     DELIMITER=',' AND
     HEADER=TRUE AND
-    MAXROWS=20 AND -- import only the first n rows on the test table
+    MAXROWS=10000 AND -- import only the first n rows on the test table
     -- stability and performance options for large rows, keep in mind that the underlying disk is an SSD
     MINBATCHSIZE=1 AND
     MAXBATCHSIZE=1 AND -- rows are very large, so keep batch size small
