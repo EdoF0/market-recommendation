@@ -13,7 +13,7 @@ services:
     #  that enables additional system and performance checks
     #  (most important, ensures the data folder has XFS filesystem)
     # more info: https://hub.docker.com/r/scylladb/scylla/
-    command: --overprovisioned 1 --smp 4 --memory 8G --developer-mode 0
+    command: --overprovisioned 1 --smp 4 --memory 8G
     ports:
       - 7000:7000/tcp # Inter-node RPC
       - 7001:7001/tcp # Inter-node RPC SSL
@@ -33,19 +33,6 @@ services:
       - ./bind/scylla.yaml:/etc/scylla/scylla.yaml
       # csv source
       - E:\Data\Analysis\Data science lab Gerli web datasets\Market analysis:/home/marketraw
-  marketdb-ui:
-    container_name: marketdb-ui
-    # https://github.com/orzhaha/cassandra-web
-    # https://hub.docker.com/r/ipushc/cassandra-web
-    image: ipushc/cassandra-web:v1.1.1
-    environment:
-      - HOST_PORT=:80
-      - CASSANDRA_HOST=marketdb
-      - CASSANDRA_USERNAME=cassandra
-      - CASSANDRA_PASSWORD=cassandra
-    ports:
-      # connect on http://localhost:8080/
-      - 8080:80/tcp
 
 volumes:
   marketdb-scylla-data:
