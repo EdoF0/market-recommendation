@@ -1,8 +1,9 @@
 from cassandra.cluster import Cluster,ExecutionProfile, EXEC_PROFILE_DEFAULT
 from cassandra.auth import PlainTextAuthProvider
 import csv
+import sys
 
-ip_address = '2.36.116.197'
+ip_address = '127.0.0.1'
 username = 'cassandra'
 password = 'cassandra'
 
@@ -12,23 +13,10 @@ profile = ExecutionProfile(
     request_timeout=9999000
 )
 
-cluster = Cluster(['2.36.116.197'], port=9042, auth_provider=auth_provider, execution_profiles={EXEC_PROFILE_DEFAULT: profile}, control_connection_timeout= None)
+cluster = Cluster([ip_address], port=9042, auth_provider=auth_provider, execution_profiles={EXEC_PROFILE_DEFAULT: profile}, control_connection_timeout= None)
 session = cluster.connect()
 
-#print(session.execute("SELECT * FROM market.market limit 1").one())
-
-#LEGGERE RIGHE contenente ogni riga una sql da cui formerà la matrice e poi lo salverà su un CSV
-rows = [] # lista che dovro leggere a ogni riga delle select
-
-file = open('file.csv', 'a')
-# \   col1 col2 col3 ..
-#col1 2    3    4 
-#col2 5    6    7
-#col2 8    9    10 
-
-# colInteresse colStimare interesse valore
-# col1         col2        5
-#
+rows = []
 
 header = [
     "categories1_artandentertainment",
@@ -64,32 +52,31 @@ header = [
     "categories1_uncategorized"
 ] #header csv
 
-writer = csv.writer(file)
-#writer.writerow(["colInteresse", "colStimare", "interesse Valore"])
+parametro1 = sys.argv[1]
+parametro2 = sys.argv[2]
 
-queryExample = "select avg(categories1_artandentertainment) as media from market.market where categories1_automotive > 90 allow filtering;categories1_artandentertainment;categories1_automotive"
+# open with empty string newline to not write two newlines with csv.writer
+# https://stackoverflow.com/questions/3191528/csv-in-python-adding-an-extra-carriage-return-on-windows
+file = open(parametro1, 'a', newline='')
 
-riga_splittata = queryExample.strip().split(";")
-# query = riga_splittata[0] + ";"
-# var1 = riga_splittata[1]
-# var2 = riga_splittata[2]
+writer = csv.writer(file, delimiter=";")
 
-# print(query)
-# query = session.execute(query).one()
-# valore = query.media
-# writer.writerow([var1, var2 ,valore])
-
-
-with open('listaQueryAggiustamentoFiltro.txt', "r") as f:
+with open(parametro2, "r") as f:
+    i=1
     for line in f.readlines():
+        print("[" + str(i) + "]")
+
         riga_splittata = line.strip().split(";")
         query = riga_splittata[0] + ";"
         var1 = riga_splittata[1]
         var2 = riga_splittata[2]
 
-        print(query)
-        query = session.execute(query).one()
-        valore = query.media
-        writer.writerow([var1, var2 ,valore])
+        print("  " + query)
+        valore = session.execute(query).one()[0]
+        writer.writerow([var1, var2, valore, query[:-1]])
+        file.flush()
+
+        print("  -> " + str(valore))
+        i += 1;
 
 file.close()
