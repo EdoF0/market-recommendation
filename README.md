@@ -25,3 +25,7 @@ For the sake of synthesis, they have been grouped into 8 macro-categories:
 There are only numerical positive values in all the dataset, except for the id column which is not numerical. For each row of the dataset, summing the values of any of the columns groups should give a value of 100. We expect the sum to be not exactly 100 for approximation issues. For the categories2 group we expect the sum to be less or equal than 100, since not every value in categories1 can be computed from categories2 values. For the same reason, we expect the categories3 sum (for each row) to be less or equal than the categories2 sum for the same row.
 
 It's important to note that we do not have the total number of visits for a user, then we cannot know if someone who has 100% interest in the automotive category is an anonymous user making just one visit to the website or a professional who only reads automotive articles with his work account.
+
+## Paper
+
+You can find the full paper in the releases section.
